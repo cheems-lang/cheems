@@ -1,0 +1,5 @@
+tings numz = [1, 2, 3, 5]
+tings oder_tings = ["hemlo", "hooman", 13, 15]
+
+primt("I has dis numberz: ", numz)
+primt("I has deez oder tings: ", oder_tings)
