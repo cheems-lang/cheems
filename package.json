@@ -1,0 +1,17 @@
+{
+  "name": "cheems",
+  "version": "0.0.1",
+  "description": "amxiety free lamgage",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [
+    "cheems-lang",
+    "amxiety-free",
+    "programming-language"
+  ],
+  "author": "Ramb Memburg",
+  "license": "MIT",
+  "type": "module"
+}
