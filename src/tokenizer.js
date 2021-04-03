@@ -66,6 +66,29 @@ class Tokenizer {
     }
 
     /**
+     * Processes text in order to buid a quoted string
+     * @returns quoted string
+     */
+    makeString() {
+        let str = '"';
+
+        this.advance();
+
+        while (this.currentCharacter !== null) {
+            if (this.currentCharacter === '"') {
+                str += '"';
+                this.advance();
+                return str;
+            }
+
+            str += this.currentCharacter;
+            this.advance();
+        }
+
+        return str;
+    }
+
+    /**
      * Creates tokens and returns them as a string array
      * @returns array of tokens
      */
@@ -79,6 +102,8 @@ class Tokenizer {
                 tokens.push(this.makeNumbers());
             } else if (TokenTypes.CHARS.includes(this.currentCharacter)) {
                 tokens.push(this.makeWord());
+            } else if (this.currentCharacter === '"') {
+                tokens.push(this.makeString());
             } else if (this.currentCharacter === '+') {
                 tokens.push(TokenTypes.PLUS);
                 this.advance();
