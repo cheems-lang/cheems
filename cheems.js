@@ -1,11 +1,13 @@
 'use strict'
 
 import run from './src/tokenizer.js';
+import makeConversion from './src/converter.js'
 
 (() => {
-    const sentence = '"Machi" + " No " + "Dorufin " + "🐬"';
+    const sentence = '$PI * (5^2)';
     const tokens = run(sentence);
-    const str = tokens.join(' ');
+    const convertedTokens = makeConversion(tokens);
+    const testString = convertedTokens.join(' ');
 
-    console.log(str, '=', eval(str));
+    console.log(testString, '=', eval(testString));
 }).call(this);

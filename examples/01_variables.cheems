@@ -1,5 +1,5 @@
-emstoramge py = 3.141592
-emstoramge ramdius = 5
-emstoramge amrea = pi * (ramdius ^ 2)
+$py = 3.141592
+$ramdius = 5
+$amrea = $py * ($ramdius ^ 2)
 
-primt("amrea is ", py)
+primt("amrea is ", $py)

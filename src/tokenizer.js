@@ -1,5 +1,7 @@
 'use strict';
 
+import Memory from './memory.js';
+
 /**
  * This class contains utility methods to tokenise
  */
@@ -89,6 +91,25 @@ class Tokenizer {
     }
 
     /**
+     * Processes text in order to generate a variable
+     * @returns a number as a string
+     */
+    makeVariable() {
+        let varStr = '';
+
+        while (this.currentCharacter !== null &&
+            TokenTypes.CHARS.includes(this.currentCharacter) ||
+            TokenTypes.DIGITS.includes(this.currentCharacter) ||
+            this.currentCharacter === '$') {
+
+            varStr += this.currentCharacter;
+            this.advance();
+        }
+
+        return varStr;
+    }
+
+    /**
      * Creates tokens and returns them as a string array
      * @returns array of tokens
      */
@@ -102,6 +123,8 @@ class Tokenizer {
                 tokens.push(this.makeNumbers());
             } else if (TokenTypes.CHARS.includes(this.currentCharacter)) {
                 tokens.push(this.makeWord());
+            } else if (this.currentCharacter === '$') {
+                tokens.push(this.makeVariable());
             } else if (this.currentCharacter === '"') {
                 tokens.push(this.makeString());
             } else if (this.currentCharacter === '+') {
@@ -124,6 +147,9 @@ class Tokenizer {
                 this.advance();
             } else if (this.currentCharacter === '^') {
                 tokens.push(TokenTypes.POW);
+                this.advance();
+            } else if (this.currentCharacter === '=') {
+                tokens.push(TokenTypes.ASSIGN);
                 this.advance();
             } else {
                 throw new Error(`Illegal Character at 0:${this.position}`);
@@ -148,6 +174,7 @@ const TokenTypes = {
     LPAREN: '(',
     RPAREN: ')',
     POW: '**',
+    ASSIGN: '='
 }
 
 /**
