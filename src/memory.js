@@ -1,7 +1,8 @@
 class Memory {
     static variables = {
-        '$PI': Math.PI,
-        '$E': Math.E
+        '$__PI__': Math.PI,
+        '$__E__': Math.E,
+        '$__DOGE__': '🐶'
     };
 
     static functions = {

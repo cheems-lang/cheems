@@ -2,12 +2,15 @@
 
 import run from './src/tokenizer.js';
 import makeConversion from './src/converter.js'
+import Memory from "./src/memory.js";
 
 (() => {
-    const sentence = '$PI * (5^2)';
+    const sentence = `$no = 1 notis 2`;
     const tokens = run(sentence);
     const convertedTokens = makeConversion(tokens);
     const testString = convertedTokens.join(' ');
 
-    console.log(testString, '=', eval(testString));
+    eval(testString);
+
+    console.table(Memory.variables);
 }).call(this);

@@ -72,13 +72,13 @@ class Tokenizer {
      * @returns quoted string
      */
     makeString() {
-        let str = '"';
+        let str = `'`;
 
         this.advance();
 
         while (this.currentCharacter !== null) {
-            if (this.currentCharacter === '"') {
-                str += '"';
+            if (this.currentCharacter === `'`) {
+                str += `'`;
                 this.advance();
                 return str;
             }
@@ -125,7 +125,7 @@ class Tokenizer {
                 tokens.push(this.makeWord());
             } else if (this.currentCharacter === '$') {
                 tokens.push(this.makeVariable());
-            } else if (this.currentCharacter === '"') {
+            } else if (this.currentCharacter === `'`) {
                 tokens.push(this.makeString());
             } else if (this.currentCharacter === '+') {
                 tokens.push(TokenTypes.PLUS);

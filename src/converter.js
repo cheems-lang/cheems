@@ -1,37 +1,32 @@
-import Memory from './memory.js'
+import Utils from './utils.js'
 
-const keywords = [
-    'emstorage'
-];
+const keywords = {
+    'nah': 'null',
+    'imbisible': 'undefined',
+    'tru': 'true',
+    'falmse': 'false',
+    'is': '===',
+    'notis': '!==',
+    'bonk': '!'
+}
 
 class Converter {
     constructor(tokens) {
         this.tokens = tokens;
     }
 
-    isVariable(text) {
-        if (text.startsWith('$')) {
-            return true;
-        }
-
-        return false;
-    }
-
     returnVariable(text) {
-        if (Memory.variables[text] === undefined) {
-            console.error(`[ERROR]: ${text} is not defined`);
-            process.exit(0);
-        }
-
-        return Memory.variables[text];
+        return `Memory.variables['${text}']`;
     }
 
     convertTokens() {
         let convertedTokens = [];
 
         for (const token of this.tokens) {
-            if (this.isVariable(token)) {
+            if (Utils.isVariable(token)) {
                 convertedTokens.push(this.returnVariable(token));
+            } else if (keywords.hasOwnProperty(token)) {
+                convertedTokens.push(keywords[token]);
             } else {
                 convertedTokens.push(token);
             }
